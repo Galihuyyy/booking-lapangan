@@ -81,9 +81,12 @@
                                     <td colspan="8" class="text-center">Tidak ada data penyewaan.</td>
                                 </tr>
                             @endif
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach ($penyewaan as $p)
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row">{{ $i++ }}</th>
                                     <td>{{ $p->lapangan->name }}</td>
                                     <td>{{ $p->user->name }}</td>
                                     <td>{{ $p->tanggal_booking }}</td>

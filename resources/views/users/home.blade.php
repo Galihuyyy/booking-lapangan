@@ -64,7 +64,6 @@
 
   </nav>
   
-  <!-- Modal -->
   <div class="modal fade" id="riwayatPemesanan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -93,12 +92,15 @@
                         <td colspan="8" class="text-center">Tidak ada data pesanan.</td>
                     </tr>
                   @endif
+                  @php
+                      $i = 1;
+                  @endphp
                     @foreach ($riwayat_pemesanan as $rp)
                       <tr>
-                          <th scope="row">1</th>
+                          <th scope="row">{{ $i++ }}</th>
                           <td>{{ $rp->lapangan->name }}</td>
                           <td>{{ $rp->tanggal_booking }}</td>
-                          <td>{{ $rp->jam_selesai }} - {{ $rp->jam_selesai }}</td>
+                          <td>{{ $rp->jam_mulai }} - {{ $rp->jam_selesai }}</td>
                           <td>{{ $rp->durasi }}</td>
                           <td>Rp {{ $rp->total_bayar }}</td>
                             @php

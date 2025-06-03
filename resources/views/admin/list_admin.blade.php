@@ -72,9 +72,12 @@
         </tr>
       </thead>
       <tbody>
+        @php
+            $i = 1;
+        @endphp
         @foreach ($admin as $a)
           <tr data-id="1">
-            <td>1</td>
+            <td>{{ $i++ }}</td>
             <td class="nama">{{ $a->name }}</td>
             <td class="text-center">
               <button type="button" data-bs-toggle="modal" data-bs-target={{ "#updateAdminModal" . $a->id }} class="btn btn-sm btn-warning btn-edit">Edit</button>
