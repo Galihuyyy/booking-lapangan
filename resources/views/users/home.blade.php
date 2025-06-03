@@ -50,6 +50,14 @@
               <li><a class="dropdown-item" href="https://api.whatsapp.com/send/?phone=6285731028944&text&type=phone_number&app_absent=0" target="_blank">WhatsApp</a></li>
             </ul>
           </li>
+          <li class="nav-item">
+              <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-danger active ms-5" >
+                      Logout
+                  </button>
+              </form>
+          </li>
         </ul>
       </div>
     </div>

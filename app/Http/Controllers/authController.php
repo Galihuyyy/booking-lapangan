@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
+
+    public function index(){
+        return redirect("/user/home");
+    }
+    
     public function showLoginForm() {
         return view('auth.login'); 
     }
@@ -35,7 +40,7 @@ class authController extends Controller
 
         Auth::login($user);
 
-        $route = $user->role == "admin" ? 'lapangan' : 'dashboard';
+        $route = $user->role == "admin" ? 'lapangan' : 'home';
 
         return redirect()->route($route)->with('success', 'Berhasil login!');
         
