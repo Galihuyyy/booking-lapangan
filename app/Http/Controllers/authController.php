@@ -40,7 +40,7 @@ class authController extends Controller
 
         Auth::login($user);
 
-        $route = $user->role == "admin" ? 'lapangan' : 'home';
+        $route = $user->role == "admin" ? 'lapangan.index' : 'home.index';
 
         return redirect()->route($route)->with('success', 'Berhasil login!');
         
