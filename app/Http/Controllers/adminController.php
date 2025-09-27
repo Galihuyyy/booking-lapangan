@@ -7,42 +7,41 @@ use App\Models\Pemesanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class adminController extends Controller
+class adminController extends BaseController
 {
 
-    public function index()
-    {
-        $admin = User::where('role', 'admin')->get();
-
-        return view("admin.list_admin", compact("admin"));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
+    private function prepareDataAdmin($request) {
+         $data = $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:6',
             'confirm_password' => 'required|same:password',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'password' => bcrypt($request->password),
-            'role' => "admin"
-        ]);
+        $data['role'] = 'admin';
 
-        return back()->with('success', 'Berhasil menyimpan data!');
+        return $data;
+    }
+
+    public function index()
+    {
+        $admin = User::where('role', 'admin')->get();
+
+        return view("admin.index", compact("admin"));
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->prepareDataAdmin($request);
+        User::create($data);
+
+        return $this->success('Berhasil menyimpan data!');
     }
 
     public function update(Request $request, $id) {
-        $request->validate([
-            'name'=> 'required',
-        ]);
-
-        User::findOrFail($id)->update([
-            'name'=> $request->name
-        ]);
-        return back()->with('success','Berhasil merubah data');
+        $data = $this->prepareDataAdmin($request);
+        User::findOrFail($id)->update($data);
+        
+        return $this->success('Berhasil merubah data');
     }
 
     public function destroy(string $id)
@@ -50,7 +49,7 @@ class adminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return back()->with('success','Berhasil menghapus data');
+        return $this->success('Berhasil menghapus data!');
     }
 
     

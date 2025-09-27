@@ -17,26 +17,11 @@ class controllerForUser extends Controller
         $lapangan = Lapangan::with(['pemesanan' => function($query) {
             $query->where('status_pemesanan', 'dikonfirmasi');
         }])->get();
-
-        $riwayat_pemesanan = Pemesanan::with('lapangan')->where('user_id', auth()->user()->id)->get();
-
-
-
+        $riwayat_pemesanan = Pemesanan::with('lapangan')->where('user_id', auth()->id())->get();
 
         return view("users.home", compact(["lapangan", "riwayat_pemesanan"]));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
