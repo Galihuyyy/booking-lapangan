@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lapangan;
 use Illuminate\Http\Request;
 
-class lapanganController extends Controller
+class lapanganController extends BaseController
 {
     private function prepareDataLapangan($request)
     {
@@ -54,7 +54,7 @@ class lapanganController extends Controller
             'harga_sewa' => $data['harga_sewa'],
         ]);
 
-        return redirect()->back()->with('success', 'Lapangan berhasil ditambahkan!');
+        return $this->success('Lapangan berhasil ditambahkan!');
     }
     public function update(Request $request, string $id)
     {
@@ -71,7 +71,7 @@ class lapanganController extends Controller
 
         $lapangan->update($data);
 
-        return redirect()->back()->with('success', 'Data lapangan berhasil diupdate!');
+        return $this->success('Data lapangan berhasil diupdate!');
     }
     public function destroy(string $id)
     {
@@ -79,6 +79,6 @@ class lapanganController extends Controller
 
         $lapangan->delete();
 
-        return redirect()->back()->with('success', 'Behasil menghapus data');
+        return $this->success('Berhasil menghapus data');
     }
 }

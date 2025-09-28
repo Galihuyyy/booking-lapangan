@@ -7,11 +7,8 @@ use App\Models\Pemesanan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class controllerForUser extends Controller
+class controllerForUser extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $lapangan = Lapangan::with(['pemesanan' => function($query) {
@@ -50,7 +47,7 @@ class controllerForUser extends Controller
                 ->exists();
 
             if ($bentrok) {
-                return redirect()->back()->with('error', "Jadwal bentrok ganti turunkan durasi atau ganti jam mulai.");
+                return $this->error('Jadwal bentrok ganti turunkan durasi atau ganti jam mulai.');
             }
         }
 
@@ -69,39 +66,7 @@ class controllerForUser extends Controller
         ]);
 
         return redirect()->route('home.index')->with('success', 'Booking berhasil disimpan!');
-
-
-
-        
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $pemesanan = Pemesanan::findOrFail($id);

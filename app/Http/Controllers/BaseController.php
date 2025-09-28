@@ -10,4 +10,8 @@ class BaseController extends Controller
     {
         return redirect()->back()->with('success', $message);
     }
+    public function error($message = '') 
+    {
+        return redirect()->back()->with('error', $message);
+    }
 }
